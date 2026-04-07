@@ -11,6 +11,13 @@ import {
 } from '../lib/notion';
 import { currentLang, t } from '../i18n';
 
+const props = defineProps<{ initialNotice?: string }>();
+
+const NOTICE_KEYWORDS: Record<string, string[]> = {
+  terms: ['이용약관', 'Terms of Service', '利用規約', '服务条款'],
+  privacy: ['개인정보', 'Privacy Policy', 'プライバシー', '隐私政策'],
+};
+
 const posts = ref<NoticePost[]>([]);
 const selectedDetail = ref<NoticeDetail | null>(null);
 const currentPost = ref<NoticePost | null>(null); // 현재 열린 공지 포스트 (언어 전환 기준)
@@ -58,6 +65,18 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
+  // initialNotice가 있으면 해당 공지 자동 오픈
+  if (props.initialNotice && NOTICE_KEYWORDS[props.initialNotice]) {
+    const keywords = NOTICE_KEYWORDS[props.initialNotice];
+    const visible = filterPostsByLang(posts.value, currentLang.value as NoticeLang);
+    const match = visible.find((p) =>
+      keywords.some((kw) => p.title.includes(kw)),
+    );
+    if (match) {
+      await openPost(match);
+    }
+  }
+
   window.addEventListener('scroll', handleScroll, { passive: true });
   requestAnimationFrame(measureBar);
 });

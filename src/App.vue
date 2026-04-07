@@ -8,9 +8,16 @@ import FaqView from './views/FaqView.vue';
 import ContactView from './views/ContactView.vue';
 
 const currentView = ref('home');
+const noticeTarget = ref(''); // 'terms' | 'privacy' | ''
 
 function navigate(view: string) {
-  currentView.value = view;
+  if (view.startsWith('notices:')) {
+    noticeTarget.value = view.split(':')[1];
+    currentView.value = 'notices';
+  } else {
+    noticeTarget.value = '';
+    currentView.value = view;
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
@@ -21,7 +28,7 @@ function navigate(view: string) {
 
     <main>
       <HomeView v-if="currentView === 'home'" @navigate="navigate" />
-      <NoticesView v-else-if="currentView === 'notices'" />
+      <NoticesView v-else-if="currentView === 'notices'" :initial-notice="noticeTarget" />
       <FaqView v-else-if="currentView === 'faq'" @navigate="navigate" />
       <ContactView v-else-if="currentView === 'contact'" />
     </main>

@@ -32,20 +32,16 @@ const emit = defineEmits<{ navigate: [view: string] }>();
               margin: 0;
             "
           >
-            AlbumBuddy is a proxy buying and shipping service that helps you easily buy<br
-              class="footer-br"
-            />
-            and receive K-pop albums, merch, and more from overseas for your convenience.
+            {{ t('footer-desc') }}
           </p>
         </div>
 
         <!-- Right: nav links -->
         <nav class="footer-nav">
-          <button class="footer-link" @click="emit('navigate', 'faq')">FAQ</button>
-          <button class="footer-link" @click="emit('navigate', 'notices')">
+          <button class="footer-link" @click="emit('navigate', 'notices:terms')">
             {{ t('이용약관') }}
           </button>
-          <button class="footer-link" @click="emit('navigate', 'notices')">
+          <button class="footer-link" @click="emit('navigate', 'notices:privacy')">
             {{ t('개인정보 처리방침') }}
           </button>
         </nav>
@@ -114,10 +110,6 @@ const emit = defineEmits<{ navigate: [view: string] }>();
   color: #4c5a66;
 }
 
-.footer-br {
-  display: none;
-}
-
 @media (min-width: 768px) {
   .footer-inner {
     padding: 32px 100px 60px;
@@ -130,9 +122,6 @@ const emit = defineEmits<{ navigate: [view: string] }>();
   .footer-nav {
     gap: 44px;
     flex-wrap: nowrap;
-  }
-  .footer-br {
-    display: inline;
   }
 }
 </style>

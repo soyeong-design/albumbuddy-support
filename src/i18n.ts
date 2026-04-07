@@ -401,6 +401,12 @@ const translations: Record<string, Record<Lang, string>> = {
     'zh-CN': '隐私政策',
   },
   이용약관: { ko: '이용약관', en: 'Terms of Service', ja: '利用規約', 'zh-CN': '服务条款' },
+  'footer-desc': {
+    ko: 'AlbumBuddy는 해외에서 K-pop 앨범, 굿즈 등을 쉽고 편리하게 구매하고 받을 수 있도록 도와주는 구매대행 및 배송대행 서비스입니다.',
+    en: 'AlbumBuddy is a proxy buying and shipping service that helps you easily buy and receive K-pop albums, merch, and more from overseas for your convenience.',
+    ja: 'AlbumBuddyは、海外からK-popアルバムやグッズなどを簡単かつ便利に購入・受け取りできる代行購入・配送サービスです。',
+    'zh-CN': 'AlbumBuddy是一项代购和转运服务，帮助您轻松便捷地从海外购买和接收K-pop专辑、周边商品等。',
+  },
 };
 
 export function t(key: string): string {
