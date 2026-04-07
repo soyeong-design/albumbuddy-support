@@ -450,9 +450,6 @@ watch(currentLang, async () => {
 
 /* Sticky search bar */
 .notices-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
   padding: 12px 0;
 }
 .notices-bar--stuck {
@@ -471,6 +468,9 @@ watch(currentLang, async () => {
   width: 100%;
 }
 .notices-bar-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
 }
 .faq-search-wrap {
