@@ -18,7 +18,7 @@ const allLocalQuestions = faqs.map((f) => f.q);
 function buildLocalTopFaqs(questions: string[]) {
   return questions.map((q) => {
     const faq = faqs.find((f) => f.q === q) ?? faqs[popularityOrder[0]];
-    return { q: faq.q, category: categoryKeyMap[faq.category] ?? '기타 문의' };
+    return { q: faq.q, a: faq.a, category: categoryKeyMap[faq.category] ?? '기타 문의' };
   });
 }
 
@@ -32,6 +32,7 @@ function buildNotionTopFaqs(lang: string) {
     .map((i) => ({
       id: i.id,
       q: i.questions[lang] || i.questions['en'] || '',
+      a: i.answers[lang] || i.answers['en'] || '',
       category: i.category,
     }))
     .filter((i) => {
@@ -52,7 +53,7 @@ function buildNotionTopFaqs(lang: string) {
   const seenFinal = new Set<string>();
   return topIds
     .map((id) => items.find((i) => i.id === id))
-    .filter((i): i is { id: string; q: string; category: string } => {
+    .filter((i): i is { id: string; q: string; a: string; category: string } => {
       if (!i || seenFinal.has(i.q)) return false;
       seenFinal.add(i.q);
       return true;
@@ -73,8 +74,16 @@ function refreshTopFaqs() {
   topFaqs.value = buildLocalTopFaqs(top);
 }
 
-const topFaqs = ref<Array<{ q: string; category: string }>>([]);
+const topFaqs = ref<Array<{ q: string; a: string; category: string }>>([]);
 const topFaqsLoading = ref(true);
+const expandedFaq = ref<Set<number>>(new Set());
+
+function toggleFaq(idx: number) {
+  const s = new Set(expandedFaq.value);
+  if (s.has(idx)) s.delete(idx);
+  else s.add(idx);
+  expandedFaq.value = s;
+}
 
 // 언어 변경 시 top FAQ 재계산
 watch(currentLang, refreshTopFaqs);
@@ -418,26 +427,27 @@ onUnmounted(() => {
 
         <!-- 데이터 로드 완료 -->
         <div v-else class="faq-home-list">
-          <button
-            v-for="(faq, i) in topFaqs"
-            :key="i"
-            class="faq-home-item"
-            @click="emit('navigate', 'faq')"
-          >
-            <div class="faq-home-item-left">
-              <span class="faq-home-badge">{{ t(faq.category) }}</span>
-              <span class="faq-home-q">{{ faq.q }}</span>
+          <div v-for="(faq, i) in topFaqs" :key="i" class="faq-home-item">
+            <button class="faq-home-btn" @click="toggleFaq(i)">
+              <div class="faq-home-item-left">
+                <span class="faq-home-badge">{{ t(faq.category) }}</span>
+                <span class="faq-home-q">{{ faq.q }}</span>
+              </div>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="faq-home-chevron"
+                :class="{ 'faq-home-chevron--open': expandedFaq.has(i) }"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div v-if="expandedFaq.has(i)" class="faq-home-answer">
+              <p style="margin: 0; white-space: pre-line">{{ faq.a }}</p>
             </div>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="faq-home-chevron"
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
+          </div>
         </div>
 
         <div style="display: flex; justify-content: center; margin-top: 32px">
@@ -851,20 +861,32 @@ onUnmounted(() => {
 }
 
 .faq-home-item {
+  border-bottom: 1px solid #e1e6ea;
+  background: #ffffff;
+}
+.faq-home-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   padding: 24px 12px;
   border: none;
-  border-bottom: 1px solid #e1e6ea;
-  background: #ffffff;
+  background: transparent;
   cursor: pointer;
   text-align: left;
+  width: 100%;
+  font-family: inherit;
   transition: background-color 0.15s;
 }
-.faq-home-item:hover {
+.faq-home-btn:hover {
   background: #f8f9fa;
+}
+.faq-home-answer {
+  padding: 0 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  color: #868e96;
 }
 
 .faq-home-item-left {
@@ -904,7 +926,10 @@ onUnmounted(() => {
   height: 24px;
   flex-shrink: 0;
   color: #adb5bd;
-  transform: rotate(-90deg);
+  transition: transform 0.2s;
+}
+.faq-home-chevron--open {
+  transform: rotate(180deg);
 }
 
 .faq-more-btn {
@@ -1139,9 +1164,14 @@ onUnmounted(() => {
     line-height: normal;
     margin-bottom: 32px;
   }
-  .faq-home-item {
+  .faq-home-btn {
     padding: 36px 20px;
     gap: 52px;
+  }
+  .faq-home-answer {
+    padding: 0 20px 36px;
+    font-size: 16px;
+    line-height: 26px;
   }
   .faq-home-q {
     font-size: 24px;
