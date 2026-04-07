@@ -284,7 +284,7 @@ onUnmounted(() => {
           <!-- ── MOBILE phone mockup ── -->
           <div class="phone-mobile-wrap">
             <div class="phone-mobile-frame">
-              <img :src="imgPhone1Mobile" alt="" class="phone-mobile-img" />
+              <img :src="imgPhone1Mobile" alt="" class="phone-mobile-img" loading="lazy" decoding="async" />
               <!-- white block behind vendor card: 321×117 at top:191, left:20 inside 343×714 -->
               <div class="phone-mobile-white" />
               <!-- vendor overlay: 343×96 at top:201, left:11 inside 343×714 -->
@@ -292,6 +292,8 @@ onUnmounted(() => {
                 <img
                   :src="imgVendorMobile"
                   alt=""
+                  loading="lazy"
+                  decoding="async"
                   style="width: 100%; height: 100%; object-fit: cover; display: block"
                 />
               </div>
@@ -300,7 +302,7 @@ onUnmounted(() => {
 
           <!-- ── DESKTOP phone mockup: composite image, scales below 1440px ── -->
           <div class="phone-desktop-wrap proxy-desktop-wrap">
-            <img :src="imgPhone1Desktop" alt="" class="desktop-phone-img" />
+            <img :src="imgPhone1Desktop" alt="" class="desktop-phone-img" loading="lazy" decoding="async" />
           </div>
 
           <!-- Content -->
@@ -351,6 +353,8 @@ onUnmounted(() => {
             <img
               :src="imgPhone2Mobile"
               alt=""
+              loading="lazy"
+              decoding="async"
               style="
                 width: 100%;
                 aspect-ratio: 440/915;
@@ -363,7 +367,7 @@ onUnmounted(() => {
 
           <!-- ── DESKTOP phone mockup: percentage-based ── -->
           <div class="phone-desktop-wrap shipping-desktop-wrap">
-            <img :src="imgPhone2Desktop" alt="" class="desktop-phone-img" />
+            <img :src="imgPhone2Desktop" alt="" class="desktop-phone-img" loading="lazy" decoding="async" />
           </div>
 
           <!-- Content -->
@@ -389,7 +393,7 @@ onUnmounted(() => {
                 </p>
               </div>
             </div>
-            <a href="https://albumbuddy.kr/my" target="_blank" rel="noopener" class="feature-btn">
+            <a href="https://albumbuddy.kr/my?tab=KOREAN_ADDRESS" target="_blank" rel="noopener" class="feature-btn">
               {{ t('확인하러 가기') }}
               <svg
                 class="btn-icon"

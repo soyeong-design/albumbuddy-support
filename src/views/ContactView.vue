@@ -477,7 +477,7 @@ function resetForm() {
 
 <style scoped>
 .contact-container {
-  max-width: 1440px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 32px 24px 80px;
 }
@@ -758,7 +758,8 @@ function resetForm() {
 /* Desktop */
 @media (min-width: 768px) {
   .contact-container {
-    padding: 80px 120px;
+    padding: 80px 24px;
+    max-width: 800px;
   }
   .contact-title {
     font-size: 60px;
