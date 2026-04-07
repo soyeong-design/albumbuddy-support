@@ -491,7 +491,7 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center top;
+  background-position: right top;
 }
 .hero-bg--desktop {
   display: none;
@@ -998,6 +998,9 @@ onUnmounted(() => {
 ════════════════════════════════════════════════════════════════ */
 @media (min-width: 768px) {
   /* Hero */
+  .hero-bg {
+    background-position: center top;
+  }
   .hero-bg--desktop {
     display: block;
   }
