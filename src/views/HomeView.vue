@@ -115,10 +115,9 @@ const imgLogoMobile = 'https://www.figma.com/api/mcp/asset/66af015b-ed48-46bd-be
 const imgPhone1Desktop = 'https://www.figma.com/api/mcp/asset/44f4fa0a-5b4f-4be1-b33a-5b449d6f6d4f'; // 구매대행 616×915
 const imgPhone2Desktop = 'https://www.figma.com/api/mcp/asset/19e358aa-c3d6-4f79-9929-6ea131771db5'; // 배송대행 440×894
 
-// Features – mobile (node 35:15754, updated)
-const imgPhone1Mobile = 'https://www.figma.com/api/mcp/asset/09caa7b2-4686-47fd-b86f-aa6f374fe712'; // 구매대행 모바일
-const imgVendorMobile = 'https://www.figma.com/api/mcp/asset/1a0efa19-3add-4849-b6c0-55fc0b936f28'; // vendor overlay
-const imgPhone2Mobile = 'https://www.figma.com/api/mcp/asset/05dc6ec3-bd45-434f-8ae5-db1203ea7b0a'; // 배송대행 모바일
+// Features – mobile (로컬 에셋)
+const imgPhone1Mobile = import.meta.env.BASE_URL + 'images/phone-proxy.png'; // 구매대행 모바일
+const imgPhone2Mobile = import.meta.env.BASE_URL + 'images/phone-shipping.png'; // 배송대행 모바일
 
 // CTA
 const imgCta = 'https://www.figma.com/api/mcp/asset/10226d8f-4a1f-41f6-ad7c-466d2a990d3c';
@@ -283,19 +282,13 @@ onUnmounted(() => {
         <div class="feature-row">
           <!-- ── MOBILE phone mockup ── -->
           <div class="phone-mobile-wrap">
-            <div class="phone-mobile-frame">
-              <img :src="imgPhone1Mobile" alt="" class="phone-mobile-img" loading="lazy" decoding="async" />
-              <div class="phone-mobile-white" />
-              <div class="vendor-mobile-wrap">
-                <img
-                  :src="imgVendorMobile"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  style="width: 100%; height: 100%; object-fit: cover; display: block"
-                />
-              </div>
-            </div>
+            <img
+              :src="imgPhone1Mobile"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              style="width: 100%; display: block"
+            />
           </div>
 
           <!-- ── DESKTOP phone mockup: composite image, scales below 1440px ── -->
