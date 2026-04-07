@@ -594,7 +594,7 @@ function resetForm() {
   color: #111417;
   outline: none;
   resize: vertical;
-  min-height: 143px;
+  min-height: 260px;
   transition: border-color 0.15s;
   line-height: 1.6;
   box-sizing: border-box;

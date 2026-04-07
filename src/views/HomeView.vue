@@ -116,8 +116,8 @@ const imgPhone1Desktop = 'https://www.figma.com/api/mcp/asset/44f4fa0a-5b4f-4be1
 const imgPhone2Desktop = 'https://www.figma.com/api/mcp/asset/19e358aa-c3d6-4f79-9929-6ea131771db5'; // 배송대행 440×894
 
 // Features – mobile (node 35:15754, updated)
-const imgPhone1Mobile = 'https://www.figma.com/api/mcp/asset/78281795-93d1-40e7-a39b-ac2eda01451d'; // 구매대행 모바일
-const imgVendorMobile = 'https://www.figma.com/api/mcp/asset/755173dc-71fa-4793-bc89-ac7dc1adfe6a'; // 343×96
+const imgPhone1Mobile = 'https://www.figma.com/api/mcp/asset/09caa7b2-4686-47fd-b86f-aa6f374fe712'; // 구매대행 모바일
+const imgVendorMobile = 'https://www.figma.com/api/mcp/asset/1a0efa19-3add-4849-b6c0-55fc0b936f28'; // vendor overlay
 const imgPhone2Mobile = 'https://www.figma.com/api/mcp/asset/05dc6ec3-bd45-434f-8ae5-db1203ea7b0a'; // 배송대행 모바일
 
 // CTA
@@ -283,13 +283,19 @@ onUnmounted(() => {
         <div class="feature-row">
           <!-- ── MOBILE phone mockup ── -->
           <div class="phone-mobile-wrap">
-            <img
-              :src="imgPhone1Mobile"
-              alt=""
-              loading="lazy"
-              decoding="async"
-              style="width: 100%; display: block; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25)"
-            />
+            <div class="phone-mobile-frame">
+              <img :src="imgPhone1Mobile" alt="" class="phone-mobile-img" loading="lazy" decoding="async" />
+              <div class="phone-mobile-white" />
+              <div class="vendor-mobile-wrap">
+                <img
+                  :src="imgVendorMobile"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
+              </div>
+            </div>
           </div>
 
           <!-- ── DESKTOP phone mockup: composite image, scales below 1440px ── -->
@@ -349,10 +355,7 @@ onUnmounted(() => {
               decoding="async"
               style="
                 width: 100%;
-                aspect-ratio: 440/915;
-                object-fit: cover;
                 display: block;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
               "
             />
           </div>
