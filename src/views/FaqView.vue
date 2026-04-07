@@ -522,6 +522,9 @@ function highlight(text: string): string {
   .faq-container {
     padding: 80px 120px;
   }
+  .faq-header-top {
+    margin-bottom: 32px;
+  }
   .faq-title {
     font-size: 60px;
     line-height: 78px;

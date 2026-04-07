@@ -109,10 +109,10 @@ const translations: Record<string, Record<Lang, string>> = {
     'zh-CN': '邮箱地址',
   },
   '이메일 주소 placeholder': {
-    ko: '이메일을 입력해주세요',
-    en: 'Enter your email address',
-    ja: 'メールアドレスを入力してください',
-    'zh-CN': '请输入邮箱地址',
+    ko: '앨범버디 가입 계정을 적어주세요.',
+    en: 'Please enter your AlbumBuddy account email.',
+    ja: 'AlbumBuddyの登録アカウントを入力してください。',
+    'zh-CN': '请输入您的AlbumBuddy注册账号邮箱。',
   },
   제목: { ko: '제목', en: 'Subject', ja: '件名', 'zh-CN': '主题' },
   '제목 placeholder': {
