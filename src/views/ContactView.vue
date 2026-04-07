@@ -56,6 +56,11 @@ watch(currentLang, (newLang, oldLang) => {
   }
 });
 
+// dev: Vite 프록시, prod: Cloudflare Worker
+const ZENDESK_BASE = import.meta.env.DEV
+  ? '/zendesk-api'
+  : `${import.meta.env.VITE_NOTION_PROXY_URL ?? ''}/zendesk`;
+
 const files = ref<File[]>([]);
 const fileInputRef = ref<HTMLInputElement | null>(null);
 const isDragging = ref(false);
@@ -113,7 +118,7 @@ function formatSize(bytes: number): string {
 
 // ── Zendesk API ────────────────────────────────────────────────
 async function uploadFile(file: File): Promise<string> {
-  const res = await fetch(`/zendesk-api/uploads.json?filename=${encodeURIComponent(file.name)}`, {
+  const res = await fetch(`${ZENDESK_BASE}/uploads.json?filename=${encodeURIComponent(file.name)}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/octet-stream' },
     body: file,
@@ -162,7 +167,7 @@ async function submit() {
       },
     };
 
-    const res = await fetch('/zendesk-api/requests.json', {
+    const res = await fetch(`${ZENDESK_BASE}/requests.json`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
