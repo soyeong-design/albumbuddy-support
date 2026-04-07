@@ -32,6 +32,7 @@ export interface NoticePost {
   slug: string;
   dbLang: string; // DB '선택' 필드 (영문/일어/국문/중문)
   groupIdx: number; // 같은 내용의 언어 변형 그룹 인덱스
+  category: string; // DB '카테고리' 필드 (일반 공지/약관/이용법)
 }
 
 /**
@@ -154,6 +155,7 @@ export async function getNoticePosts(): Promise<NoticePost[]> {
     slug: string;
     dbLang: string;
     createdAt: number;
+    category: string;
   }> = [];
 
   for (const id of blockIds) {
@@ -166,11 +168,12 @@ export async function getNoticePosts(): Promise<NoticePost[]> {
     const status = (v.properties?.['w<bc'] ?? []).map((s: any) => s[0]).join('');
     if (status !== '게시됨') continue;
 
-    const dbLang = (v.properties?.['|e{a'] ?? []).map((s: any) => s[0]).join('') || '영문';
+    const dbLang = (v.properties?.['|e{a'] ?? (v.properties?.[':dNa'] ?? [])).map((s: any) => s[0]).join('') || '영문';
+    const category = (v.properties?.['=^pP'] ?? []).map((s: any) => s[0]).join('') || '';
     const createdAt: number = v.created_time ?? 0;
     const date = createdAt ? formatTs(createdAt) : '';
     const slug = toSlug(id);
-    raw.push({ id, title, date, slug, dbLang, createdAt });
+    raw.push({ id, title, date, slug, dbLang, createdAt, category });
   }
 
   // 2단계: DB 순서 기준으로 동적 그룹 인덱스 부여
@@ -203,6 +206,7 @@ export async function getNoticePosts(): Promise<NoticePost[]> {
       slug: r.slug,
       dbLang: r.dbLang,
       groupIdx: newGroupIdx,
+      category: r.category,
     })),
   );
 }

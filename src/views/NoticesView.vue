@@ -20,21 +20,34 @@ const NOTICE_KEYWORDS: Record<string, string[]> = {
 
 const posts = ref<NoticePost[]>([]);
 const selectedDetail = ref<NoticeDetail | null>(null);
-const currentPost = ref<NoticePost | null>(null); // 현재 열린 공지 포스트 (언어 전환 기준)
+const currentPost = ref<NoticePost | null>(null);
 const loading = ref(true);
 const detailLoading = ref(false);
 const error = ref(false);
 const searchQuery = ref('');
+const activeCategory = ref('All');
 
 // 현재 언어에 맞는 변형만 필터링 (언어 바뀌면 자동 반영)
 const visiblePosts = computed(() =>
   filterPostsByLang(posts.value, currentLang.value as NoticeLang),
 );
 
+// 카테고리 목록 (중복 제거)
+const categories = computed(() => {
+  const cats = [...new Set(visiblePosts.value.map((p) => p.category).filter(Boolean))];
+  return ['All', ...cats];
+});
+
 const filteredPosts = computed(() => {
+  let result = visiblePosts.value;
+  if (activeCategory.value !== 'All') {
+    result = result.filter((p) => p.category === activeCategory.value);
+  }
   const q = searchQuery.value.trim().toLowerCase();
-  if (!q) return visiblePosts.value;
-  return visiblePosts.value.filter((p) => p.title.toLowerCase().includes(q));
+  if (q) {
+    result = result.filter((p) => p.title.toLowerCase().includes(q));
+  }
+  return result;
 });
 
 const isSearching = computed(() => searchQuery.value.trim().length > 0);
@@ -200,6 +213,22 @@ watch(currentLang, async () => {
               />
               <button v-if="searchQuery" class="faq-search-clear" @click="searchQuery = ''">
                 <CancelCircleMono style="width: 20px; height: 20px" />
+              </button>
+            </div>
+
+            <div v-if="!isSearching" class="notices-chips">
+              <button
+                v-for="cat in categories"
+                :key="cat"
+                class="notices-chip"
+                :style="
+                  activeCategory === cat
+                    ? { backgroundColor: '#863dff', color: '#ffffff', border: '1px solid #863dff' }
+                    : { border: '1px solid #f1f3f5', backgroundColor: '#f1f3f5', color: '#212529' }
+                "
+                @click="activeCategory = cat"
+              >
+                {{ cat === 'All' ? t('All') : t(cat) }}
               </button>
             </div>
           </div>
@@ -389,9 +418,42 @@ watch(currentLang, async () => {
   padding: 12px 16px;
   margin: 8px 0;
 }
+/* Chips */
+.notices-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.notices-chips::-webkit-scrollbar {
+  display: none;
+}
+.notices-chip {
+  padding: 0 14px;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: pointer;
+  white-space: nowrap;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+  font-family: inherit;
+}
+.notices-chip:hover {
+  opacity: 0.85;
+}
+
 /* Sticky search bar */
 .notices-bar {
-  padding: 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0;
 }
 .notices-bar--stuck {
   position: fixed;
@@ -492,6 +554,14 @@ watch(currentLang, async () => {
   }
   .board-detail-content {
     max-width: 800px;
+  }
+  .notices-chips {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  .notices-chip {
+    height: 48px;
+    padding: 10px 20px;
   }
   .notices-bar--stuck {
     padding: 12px 120px;
