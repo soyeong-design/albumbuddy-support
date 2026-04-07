@@ -422,20 +422,26 @@ function highlight(text: string): string {
 /* Chips */
 .faq-chips {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.faq-chips::-webkit-scrollbar {
+  display: none;
 }
 .faq-chip {
-  padding: 10px 20px;
+  padding: 0 14px;
   border-radius: 9999px;
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
   cursor: pointer;
   white-space: nowrap;
-  height: 48px;
+  height: 40px;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 .faq-chip:hover {
   opacity: 0.85;
@@ -525,6 +531,14 @@ function highlight(text: string): string {
     line-height: 28px;
     height: 56px;
     padding: 0 14px;
+  }
+  .faq-chips {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  .faq-chip {
+    height: 48px;
+    padding: 10px 20px;
   }
   .faq-bar--stuck {
     padding: 12px 120px;

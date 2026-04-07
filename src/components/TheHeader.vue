@@ -132,7 +132,13 @@ onUnmounted(() => {
 
       <!-- Mobile Hamburger -->
       <button class="mobile-hamburger" @click="toggleMobileMenu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg
+          style="width: 24px; height: 24px"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <template v-if="!isMobileMenuOpen">
             <line x1="3" y1="6" x2="21" y2="6" />
             <line x1="3" y1="12" x2="21" y2="12" />
@@ -216,10 +222,12 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
+  height: 56px;
+  padding: 0 16px;
 }
 @media (min-width: 768px) {
   .gnb-inner {
+    height: auto;
     padding: 14px 120px;
   }
 }
@@ -405,12 +413,13 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   border: none;
   background: transparent;
   cursor: pointer;
   transition: color 0.35s ease;
+  padding: 0;
 }
 .gnb--transparent .mobile-hamburger {
   color: #fcfdfd;
@@ -429,14 +438,14 @@ onUnmounted(() => {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  top: 68px; /* gnb height: 14+40+14 = 68px */
+  top: 56px;
   z-index: 40;
   background: #fff;
 }
 .mobile-menu-backdrop {
   position: fixed;
   inset: 0;
-  top: 68px;
+  top: 56px;
   z-index: -1;
 }
 .mobile-menu-item {
