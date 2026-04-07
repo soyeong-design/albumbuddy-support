@@ -774,5 +774,8 @@ function resetForm() {
   .contact-card {
     padding: 40px;
   }
+  .field-textarea {
+    min-height: 180px;
+  }
 }
 </style>
