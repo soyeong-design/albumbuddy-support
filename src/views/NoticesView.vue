@@ -400,8 +400,8 @@ watch(currentLang, async () => {
   right: 0;
   z-index: 20;
   background-color: #ffffff;
-  padding: 8px 24px 12px;
-  box-shadow: 0 -20px 0 #ffffff, 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: 12px 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 .notices-bar--stuck .notices-bar-inner {
   max-width: 1200px;
