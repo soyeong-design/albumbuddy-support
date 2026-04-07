@@ -300,7 +300,7 @@ watch(currentLang, async () => {
 .board-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 32px 24px 100px;
 }
 .board-title {
   font-size: 32px;
@@ -537,7 +537,7 @@ watch(currentLang, async () => {
 
 @media (min-width: 768px) {
   .board-container {
-    padding: 80px 120px;
+    padding: 80px 120px 200px;
   }
   .board-title {
     font-size: 60px;

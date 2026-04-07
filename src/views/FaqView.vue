@@ -318,7 +318,7 @@ function highlight(text: string): string {
 .faq-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 32px 24px 100px;
 }
 
 .faq-header-top {
@@ -520,7 +520,7 @@ function highlight(text: string): string {
 /* Desktop */
 @media (min-width: 768px) {
   .faq-container {
-    padding: 80px 120px;
+    padding: 80px 120px 200px;
   }
   .faq-header-top {
     margin-bottom: 32px;
