@@ -491,7 +491,7 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: right top;
+  background-position: 70% top;
 }
 .hero-bg--desktop {
   display: none;
