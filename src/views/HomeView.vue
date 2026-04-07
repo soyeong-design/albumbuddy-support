@@ -116,9 +116,9 @@ const imgPhone1Desktop = 'https://www.figma.com/api/mcp/asset/44f4fa0a-5b4f-4be1
 const imgPhone2Desktop = 'https://www.figma.com/api/mcp/asset/19e358aa-c3d6-4f79-9929-6ea131771db5'; // 배송대행 440×894
 
 // Features – mobile (node 35:15754, updated)
-const imgPhone1Mobile = 'https://www.figma.com/api/mcp/asset/d72a5a79-6107-4a25-b6a2-4e915619a710'; // 354×736
+const imgPhone1Mobile = 'https://www.figma.com/api/mcp/asset/78281795-93d1-40e7-a39b-ac2eda01451d'; // 구매대행 모바일
 const imgVendorMobile = 'https://www.figma.com/api/mcp/asset/755173dc-71fa-4793-bc89-ac7dc1adfe6a'; // 343×96
-const imgPhone2Mobile = 'https://www.figma.com/api/mcp/asset/23006e8e-0d6a-4701-9ac5-2da1d70a22a2'; // 354×716
+const imgPhone2Mobile = 'https://www.figma.com/api/mcp/asset/05dc6ec3-bd45-434f-8ae5-db1203ea7b0a'; // 배송대행 모바일
 
 // CTA
 const imgCta = 'https://www.figma.com/api/mcp/asset/10226d8f-4a1f-41f6-ad7c-466d2a990d3c';
@@ -283,21 +283,13 @@ onUnmounted(() => {
         <div class="feature-row">
           <!-- ── MOBILE phone mockup ── -->
           <div class="phone-mobile-wrap">
-            <div class="phone-mobile-frame">
-              <img :src="imgPhone1Mobile" alt="" class="phone-mobile-img" loading="lazy" decoding="async" />
-              <!-- white block behind vendor card: 321×117 at top:191, left:20 inside 343×714 -->
-              <div class="phone-mobile-white" />
-              <!-- vendor overlay: 343×96 at top:201, left:11 inside 343×714 -->
-              <div class="vendor-mobile-wrap">
-                <img
-                  :src="imgVendorMobile"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  style="width: 100%; height: 100%; object-fit: cover; display: block"
-                />
-              </div>
-            </div>
+            <img
+              :src="imgPhone1Mobile"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              style="width: 100%; display: block; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25)"
+            />
           </div>
 
           <!-- ── DESKTOP phone mockup: composite image, scales below 1440px ── -->
@@ -1046,6 +1038,11 @@ onUnmounted(() => {
     display: grid;
     grid-template-columns: 460px 1fr;
     gap: 60px 0;
+  }
+  .stat-label {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 40px;
   }
   .stat-value {
     font-size: 80px;

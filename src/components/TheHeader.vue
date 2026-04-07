@@ -222,7 +222,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
+  height: 64px;
   padding: 0 16px;
 }
 @media (min-width: 768px) {
@@ -438,14 +438,14 @@ onUnmounted(() => {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  top: 56px;
+  top: 64px;
   z-index: 40;
   background: #fff;
 }
 .mobile-menu-backdrop {
   position: fixed;
   inset: 0;
-  top: 56px;
+  top: 64px;
   z-index: -1;
 }
 .mobile-menu-item {
