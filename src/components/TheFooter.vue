@@ -30,6 +30,7 @@ const emit = defineEmits<{ navigate: [view: string] }>();
               letter-spacing: -0.3px;
               color: #8a99a8;
               margin: 0;
+              white-space: pre-line;
             "
           >
             {{ t('footer-desc') }}
