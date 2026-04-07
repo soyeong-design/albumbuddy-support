@@ -361,7 +361,7 @@ function highlight(text: string): string {
   right: 0;
   z-index: 20;
   background-color: #ffffff;
-  padding: 12px 24px;
+  padding: 24px 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 .faq-bar--stuck .faq-bar-inner {
