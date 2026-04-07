@@ -496,6 +496,7 @@ function resetForm() {
   flex-direction: column;
   gap: 32px;
   max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Field group */
