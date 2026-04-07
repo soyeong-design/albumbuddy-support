@@ -592,9 +592,9 @@ onUnmounted(() => {
 }
 
 .stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .stat-item {
@@ -1039,6 +1039,7 @@ onUnmounted(() => {
     line-height: 63px;
   }
   .stats-grid {
+    display: grid;
     grid-template-columns: 460px 1fr;
     gap: 60px 0;
   }
