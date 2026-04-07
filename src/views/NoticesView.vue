@@ -14,8 +14,8 @@ import { currentLang, t } from '../i18n';
 const props = defineProps<{ initialNotice?: string }>();
 
 const NOTICE_KEYWORDS: Record<string, string[]> = {
-  terms: ['이용약관', 'Terms of Service', '利用規約', '服务条款'],
-  privacy: ['개인정보', 'Privacy Policy', 'プライバシー', '隐私政策'],
+  terms: ['이용약관', 'Term of Service', 'Terms of Service', '利用規約', '服务条款'],
+  privacy: ['개인정보', 'Privacy Policy', '個人情報', 'プライバシー', '隐私政策'],
 };
 
 const posts = ref<NoticePost[]>([]);
