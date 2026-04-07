@@ -63,6 +63,16 @@ const ZENDESK_BASE = import.meta.env.DEV
 
 const files = ref<File[]>([]);
 const fileInputRef = ref<HTMLInputElement | null>(null);
+const toastMessage = ref('');
+let toastTimer: ReturnType<typeof setTimeout> | null = null;
+
+function showToast(msg: string) {
+  toastMessage.value = msg;
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toastMessage.value = ''; }, 3000);
+}
+
+const MAX_FILE_SIZE = 800 * 1024 * 1024; // 800MB
 const isDragging = ref(false);
 const submitting = ref(false);
 const submitted = ref(false);
@@ -102,6 +112,11 @@ function handleDrop(e: DragEvent) {
 }
 
 function addFiles(newFiles: File[]) {
+  const oversized = newFiles.filter((f) => f.size > MAX_FILE_SIZE);
+  if (oversized.length > 0) {
+    showToast(t('파일 용량 초과'));
+    newFiles = newFiles.filter((f) => f.size <= MAX_FILE_SIZE);
+  }
   const merged = [...files.value, ...newFiles];
   files.value = merged.slice(0, 10);
 }
@@ -196,6 +211,11 @@ function resetForm() {
 
 <template>
   <div style="background-color: #ffffff; min-height: 100vh; padding-top: 64px">
+    <!-- Toast -->
+    <Transition name="toast">
+      <div v-if="toastMessage" class="toast">{{ toastMessage }}</div>
+    </Transition>
+
     <div class="contact-container">
       <!-- ── 성공 화면 ──────────────────────────────────────────── -->
       <template v-if="submitted">
@@ -481,6 +501,32 @@ function resetForm() {
 </template>
 
 <style scoped>
+/* Toast */
+.toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #212529;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+.toast-enter-active,
+.toast-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-8px);
+}
+
 .contact-container {
   max-width: 800px;
   margin: 0 auto;

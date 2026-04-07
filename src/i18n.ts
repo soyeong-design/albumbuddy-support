@@ -172,6 +172,12 @@ const translations: Record<string, Record<Lang, string>> = {
     ja: '1ファイルあたり最大800MBまでアップロードできます。',
     'zh-CN': '每个文件最大支持上传 800MB。',
   },
+  '파일 용량 초과': {
+    ko: '파일 용량을 확인해주세요. (최대 800MB)',
+    en: 'Please check the file size. (Max 800MB)',
+    ja: 'ファイルサイズをご確認ください。（最大800MB）',
+    'zh-CN': '请检查文件大小。（最大800MB）',
+  },
   제출: { ko: '제출', en: 'Submit', ja: '送信', 'zh-CN': '提交' },
   '접수 완료': {
     ko: '문의가 접수되었습니다',
