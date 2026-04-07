@@ -267,7 +267,7 @@ function resetForm() {
 
       <!-- ── 폼 화면 ─────────────────────────────────────────────── -->
       <template v-else>
-        <h1 class="contact-title" style="color: #212529; font-weight: 700; margin: 0 0 16px">
+        <h1 class="contact-title" style="color: #212529; font-weight: 700">
           {{ t('문의하기 제목') }}
         </h1>
 
@@ -536,6 +536,7 @@ function resetForm() {
 .contact-title {
   font-size: 32px;
   line-height: 48px;
+  margin: 0 0 16px;
 }
 
 /* Form Card */
