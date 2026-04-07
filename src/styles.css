@@ -1,0 +1,696 @@
+@import 'tailwindcss';
+
+/*
+ * Palette Tokens — 고정 색상 스케일, 오버레이, 폰트, 반지름
+ * 테마(라이트/다크)에 관계없이 값이 변하지 않는 원시 토큰
+ */
+
+@theme {
+  /* Font Family */
+  --font-sans:
+    'Pretendard Variable', 'Pretendard JP Variable', -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Gray */
+  --color-gray-001: #fcfdfd;
+  --color-gray-005: #f0f3f4;
+  --color-gray-010: #e1e6ea;
+  --color-gray-020: #c4cdd4;
+  --color-gray-030: #a7b3be;
+  --color-gray-040: #8a99a8;
+  --color-gray-050: #6d7f92;
+  --color-gray-060: #4c5a66;
+  --color-gray-070: #3b454f;
+  --color-gray-080: #2d353d;
+  --color-gray-090: #1f242a;
+  --color-gray-099: #111417;
+
+  /* Pink */
+  --color-pink-001: #fefafc;
+  --color-pink-005: #fce8ef;
+  --color-pink-010: #fad1df;
+  --color-pink-020: #f5a3be;
+  --color-pink-030: #f76e9c;
+  --color-pink-040: #ff4d89;
+  --color-pink-050: #e5195e;
+  --color-pink-060: #b7154b;
+  --color-pink-070: #770d30;
+  --color-pink-080: #5b0b26;
+  --color-pink-090: #3b121b;
+  --color-pink-099: #1d1112;
+
+  /* Purple */
+  --color-purple-001: #fcfafe;
+  --color-purple-005: #efe8fd;
+  --color-purple-010: #d9c6fb;
+  --color-purple-020: #c099ff;
+  --color-purple-030: #a066ff;
+  --color-purple-040: #863dff;
+  --color-purple-050: #6204fb;
+  --color-purple-060: #5207cf;
+  --color-purple-070: #4309aa;
+  --color-purple-080: #300877;
+  --color-purple-090: #1d0646;
+  --color-purple-099: #110429;
+
+  /* Indigo */
+  --color-indigo-001: #fafcff;
+  --color-indigo-005: #e8effd;
+  --color-indigo-010: #c2d4f9;
+  --color-indigo-020: #99b7f5;
+  --color-indigo-030: #6b98f0;
+  --color-indigo-040: #477eeb;
+  --color-indigo-050: #195ee6;
+  --color-indigo-060: #144bb8;
+  --color-indigo-070: #113f9b;
+  --color-indigo-080: #0a2760;
+  --color-indigo-090: #071b42;
+  --color-indigo-099: #041129;
+
+  /* Blue */
+  --color-blue-001: #fafdfe;
+  --color-blue-005: #e8f6fd;
+  --color-blue-010: #c8e9f9;
+  --color-blue-020: #a3daf5;
+  --color-blue-030: #6cc3ef;
+  --color-blue-040: #35ade9;
+  --color-blue-050: #19a1e6;
+  --color-blue-060: #1482b8;
+  --color-blue-070: #0f628a;
+  --color-blue-080: #0b4765;
+  --color-blue-090: #062737;
+  --color-blue-099: #041a25;
+
+  /* Green */
+  --color-green-001: #fafffb;
+  --color-green-005: #e3fce8;
+  --color-green-010: #b3f4c1;
+  --color-green-020: #87e89e;
+  --color-green-030: #5ed97e;
+  --color-green-040: #39c661;
+  --color-green-050: #2cac4e;
+  --color-green-060: #20903c;
+  --color-green-070: #16732c;
+  --color-green-080: #0e541d;
+  --color-green-090: #073410;
+  --color-green-099: #031c08;
+
+  /* Lime */
+  --color-lime-001: #fdfffa;
+  --color-lime-005: #f4fce3;
+  --color-lime-010: #e4f8bb;
+  --color-lime-020: #d4f393;
+  --color-lime-030: #c3ef6a;
+  --color-lime-040: #b4eb47;
+  --color-lime-050: #94d417;
+  --color-lime-060: #82b814;
+  --color-lime-070: #618a0f;
+  --color-lime-080: #425c0a;
+  --color-lime-090: #212e05;
+  --color-lime-099: #141c03;
+
+  /* Yellow */
+  --color-yellow-001: #fffefa;
+  --color-yellow-005: #fdf9e8;
+  --color-yellow-010: #f7edb7;
+  --color-yellow-020: #f3e28c;
+  --color-yellow-030: #eed660;
+  --color-yellow-040: #e8ca30;
+  --color-yellow-050: #ddbd18;
+  --color-yellow-060: #b89f14;
+  --color-yellow-070: #8a780f;
+  --color-yellow-080: #5c500a;
+  --color-yellow-090: #2e2905;
+  --color-yellow-099: #1c1803;
+
+  /* Orange */
+  --color-orange-001: #fffcfa;
+  --color-orange-005: #fdeee8;
+  --color-orange-010: #fad5c7;
+  --color-orange-020: #f6b8a0;
+  --color-orange-030: #f29c7c;
+  --color-orange-040: #ed7a4f;
+  --color-orange-050: #e65019;
+  --color-orange-060: #c04416;
+  --color-orange-070: #913412;
+  --color-orange-080: #63240e;
+  --color-orange-090: #351408;
+  --color-orange-099: #200b04;
+
+  /* Red */
+  --color-red-001: #fefafa;
+  --color-red-005: #fde8e8;
+  --color-red-010: #f7baba;
+  --color-red-020: #f28c8c;
+  --color-red-030: #ed5d5d;
+  --color-red-040: #e93939;
+  --color-red-050: #e61919;
+  --color-red-060: #b81414;
+  --color-red-070: #931010;
+  --color-red-080: #6e0c0c;
+  --color-red-090: #370606;
+  --color-red-099: #250404;
+
+  /* White */
+  --color-white: #ffffff;
+
+  /* Overlay */
+  --color-overlay-080: #000000cc;
+  --color-overlay-072: #000000b8;
+  --color-overlay-056: #0000008f;
+  --color-overlay-048: #0000007a;
+  --color-overlay-044: #11141770;
+  --color-overlay-040: #11141766;
+  --color-overlay-036: #1f242a5c;
+  --color-overlay-032: #1f242a52;
+  --color-overlay-024: #2d353d3d;
+  --color-overlay-020: #3b454f33;
+  --color-overlay-016: #4c5a6629;
+  --color-overlay-008: #6d7f9214;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+}
+
+/*
+ * Semantic Tokens — Figma 시맨틱 변수와 1:1 매핑
+ * :root (light) / .dark 에서 CSS 변수 스왑, @theme inline으로 Tailwind 등록
+ *
+ * 다크 모드 추가 시 :root:where(.dark) 블록에 값만 오버라이드하면 됩니다.
+ */
+
+/* ────────────────────────────────────────────────
+   Light mode values
+   ──────────────────────────────────────────────── */
+:root {
+  /* Fg (Foreground) */
+  --token-fg-default: #111417;
+  --token-fg-subtle: #6d7f92;
+  --token-fg-subtlest: #8a99a8;
+  --token-fg-disabled: #2d353d3d;
+  --token-fg-selected: #a3daf5;
+  --token-fg-focused: #19a1e6;
+  --token-fg-danger-default: #e61919;
+  --token-fg-danger-bolder: #6e0c0c;
+  --token-fg-warning-default: #b89f14;
+  --token-fg-warning-bolder: #5c500a;
+  --token-fg-success-default: #20903c;
+  --token-fg-success-bolder: #0e541d;
+  --token-fg-info-default: #1482b8;
+  --token-fg-info-bolder: #0b4765;
+
+  /* Fg / Inverse */
+  --token-fg-inverse-default: #fcfdfd;
+  --token-fg-inverse-subtle: #6d7f92;
+  --token-fg-inverse-subtlest: #4c5a66;
+  --token-fg-inverse-disabled: #1f242a5c;
+  --token-fg-inverse-selected: #19a1e6;
+  --token-fg-inverse-focused: #a3daf5;
+  --token-fg-inverse-danger-default: #e93939;
+  --token-fg-inverse-danger-bolder: #f28c8c;
+  --token-fg-inverse-warning-default: #e8ca30;
+  --token-fg-inverse-warning-bolder: #f3e28c;
+  --token-fg-inverse-success-default: #39c661;
+  --token-fg-inverse-success-bolder: #87e89e;
+  --token-fg-inverse-info-default: #35ade9;
+  --token-fg-inverse-info-bolder: #a3daf5;
+
+  /* Fg / Accent */
+  --token-fg-accent-brand1-default: #ff4d89;
+  --token-fg-accent-brand1-bolder: #b7154b;
+  --token-fg-accent-brand1-subtle: #f5a3be;
+  --token-fg-accent-brand1-subtlest: #fad1df;
+  --token-fg-accent-brand1-disabled: #fad1df;
+  --token-fg-accent-brand2-default: #863dff;
+  --token-fg-accent-brand2-bolder: #5207cf;
+  --token-fg-accent-brand2-subtle: #c099ff;
+  --token-fg-accent-brand2-subtlest: #d9c6fb;
+  --token-fg-accent-brand2-disabled: #d9c6fb;
+  --token-fg-accent-gray-default: #6d7f92;
+  --token-fg-accent-gray-bolder: #3b454f;
+  --token-fg-accent-gray-disabled: #e1e6ea;
+  --token-fg-accent-blue-default: #1482b8;
+  --token-fg-accent-blue-bolder: #0b4765;
+  --token-fg-accent-blue-disabled: #e8f6fd;
+  --token-fg-accent-green-default: #20903c;
+  --token-fg-accent-green-bolder: #0e541d;
+  --token-fg-accent-green-disabled: #e3fce8;
+  --token-fg-accent-indigo-default: #144bb8;
+  --token-fg-accent-indigo-bolder: #0a2760;
+  --token-fg-accent-indigo-disabled: #c2d4f9;
+  --token-fg-accent-lime-default: #82b814;
+  --token-fg-accent-lime-bolder: #425c0a;
+  --token-fg-accent-lime-disabled: #f4fce3;
+  --token-fg-accent-orange-default: #e65019;
+  --token-fg-accent-orange-bolder: #63240e;
+  --token-fg-accent-orange-disabled: #fdeee8;
+  --token-fg-accent-red-default: #e61919;
+  --token-fg-accent-red-bolder: #6e0c0c;
+  --token-fg-accent-red-disabled: #f7baba;
+  --token-fg-accent-yellow-default: #b89f14;
+  --token-fg-accent-yellow-bolder: #5c500a;
+  --token-fg-accent-yellow-disabled: #fdf9e8;
+
+  /* Bg (Background) */
+  --token-bg-default: #fcfdfd;
+  --token-bg-subtle: #f0f3f4;
+  --token-bg-subtlest: #e1e6ea;
+  --token-bg-disabled: #6d7f9214;
+  --token-bg-selected: #f5a3be;
+  --token-bg-focused: #99b7f5;
+  --token-bg-danger: #b81414;
+  --token-bg-info: #1482b8;
+  --token-bg-success: #20903c;
+  --token-bg-warning: #b89f14;
+
+  /* Bg / Inverse */
+  --token-bg-inverse-default: #2d353d;
+  --token-bg-inverse-subtle: #1f242a;
+  --token-bg-inverse-subtlest: #4c5a6652;
+  --token-bg-inverse-disabled: #3b454f33;
+  --token-bg-inverse-selected: #b7154b;
+  --token-bg-inverse-focused: #144bb8;
+  --token-bg-inverse-danger: #e93939;
+  --token-bg-inverse-info: #35ade9;
+  --token-bg-inverse-success: #39c661;
+  --token-bg-inverse-warning: #e8ca30;
+
+  /* Bg / Accent / Brand1 (Pink) */
+  --token-bg-accent-brand1-default: #ff4d89;
+  --token-bg-accent-brand1-hovered: #e5195e;
+  --token-bg-accent-brand1-pressed: #b7154b;
+  --token-bg-accent-brand1-disabled: #fad1df;
+  --token-bg-accent-brand1-subtle: #f5a3be;
+  --token-bg-accent-brand1-subtlest: #fce8ef;
+  /* Bg / Accent / Brand2 (Purple) */
+  --token-bg-accent-brand2-default: #863dff;
+  --token-bg-accent-brand2-hovered: #6204fb;
+  --token-bg-accent-brand2-pressed: #5207cf;
+  --token-bg-accent-brand2-disabled: #d9c6fb;
+  --token-bg-accent-brand2-subtle: #c099ff;
+  --token-bg-accent-brand2-subtlest: #efe8fd;
+  /* Bg / Accent / Gray */
+  --token-bg-accent-gray-default: #c4cdd4;
+  --token-bg-accent-gray-hovered: #a7b3be;
+  --token-bg-accent-gray-pressed: #8a99a8;
+  --token-bg-accent-gray-disabled: #e1e6ea;
+  --token-bg-accent-gray-subtle: #e1e6ea;
+  --token-bg-accent-gray-subtlest: #f0f3f4;
+  /* Bg / Accent / Blue */
+  --token-bg-accent-blue-default: #19a1e6;
+  --token-bg-accent-blue-hovered: #1482b8;
+  --token-bg-accent-blue-pressed: #0f628a;
+  --token-bg-accent-blue-disabled: #e8f6fd;
+  --token-bg-accent-blue-subtle: #a3daf5;
+  --token-bg-accent-blue-subtlest: #e8f6fd;
+  /* Bg / Accent / Green */
+  --token-bg-accent-green-default: #2cac4e;
+  --token-bg-accent-green-hovered: #20903c;
+  --token-bg-accent-green-pressed: #16732c;
+  --token-bg-accent-green-disabled: #e3fce8;
+  --token-bg-accent-green-subtle: #87e89e;
+  --token-bg-accent-green-subtlest: #e3fce8;
+  /* Bg / Accent / Indigo */
+  --token-bg-accent-indigo-default: #195ee6;
+  --token-bg-accent-indigo-hovered: #144bb8;
+  --token-bg-accent-indigo-pressed: #113f9b;
+  --token-bg-accent-indigo-disabled: #e8effd;
+  --token-bg-accent-indigo-subtle: #99b7f5;
+  --token-bg-accent-indigo-subtlest: #e8effd;
+  /* Bg / Accent / Lime */
+  --token-bg-accent-lime-default: #94d417;
+  --token-bg-accent-lime-hovered: #82b814;
+  --token-bg-accent-lime-pressed: #618a0f;
+  --token-bg-accent-lime-disabled: #f4fce3;
+  --token-bg-accent-lime-subtle: #d4f393;
+  --token-bg-accent-lime-subtlest: #f4fce3;
+  /* Bg / Accent / Orange */
+  --token-bg-accent-orange-default: #e65019;
+  --token-bg-accent-orange-hovered: #c04416;
+  --token-bg-accent-orange-pressed: #913412;
+  --token-bg-accent-orange-disabled: #fad5c7;
+  --token-bg-accent-orange-subtle: #f6b8a0;
+  --token-bg-accent-orange-subtlest: #fdeee8;
+  /* Bg / Accent / Red */
+  --token-bg-accent-red-default: #e93939;
+  --token-bg-accent-red-hovered: #e61919;
+  --token-bg-accent-red-pressed: #b81414;
+  --token-bg-accent-red-disabled: #f7baba;
+  --token-bg-accent-red-subtle: #f28c8c;
+  --token-bg-accent-red-subtlest: #fde8e8;
+  /* Bg / Accent / Yellow */
+  --token-bg-accent-yellow-default: #ddbd18;
+  --token-bg-accent-yellow-hovered: #b89f14;
+  --token-bg-accent-yellow-pressed: #8a780f;
+  --token-bg-accent-yellow-disabled: #fdf9e8;
+  --token-bg-accent-yellow-subtle: #f3e28c;
+  --token-bg-accent-yellow-subtlest: #fdf9e8;
+
+  /* Border */
+  --token-border-default: #e1e6ea;
+  --token-border-subtle: #f0f3f4;
+  --token-border-subtlest: #3b454f33;
+  --token-border-disabled: #3b454f33;
+  --token-border-selected: #19a1e6;
+  --token-border-focused: #a3daf5;
+  --token-border-overlay: #3b454f33;
+  --token-border-danger: #e61919;
+  --token-border-info: #1482b8;
+  --token-border-success: #20903c;
+  --token-border-warning: #b89f14;
+
+  /* Border / Inverse */
+  --token-border-inverse-default: #2d353d;
+  --token-border-inverse-subtle: #1f242a;
+  --token-border-inverse-subtlest: #2d353d3d;
+  --token-border-inverse-disabled: #1f242a5c;
+  --token-border-inverse-selected: #a3daf5;
+  --token-border-inverse-focused: #19a1e6;
+  --token-border-inverse-overlay: #2d353d3d;
+  --token-border-inverse-danger: #e93939;
+  --token-border-inverse-info: #35ade9;
+  --token-border-inverse-success: #39c661;
+  --token-border-inverse-warning: #e8ca30;
+
+  /* Border / Accent / Brand1 (Pink) */
+  --token-border-accent-brand1-default: #ff4d89;
+  --token-border-accent-brand1-subtle: #f5a3be;
+  --token-border-accent-brand1-subtlest: #fad1df;
+  --token-border-accent-brand1-disabled: #fad1df;
+  /* Border / Accent / Brand2 (Purple) */
+  --token-border-accent-brand2-default: #863dff;
+  --token-border-accent-brand2-subtle: #c099ff;
+  --token-border-accent-brand2-subtlest: #d9c6fb;
+  --token-border-accent-brand2-disabled: #d9c6fb;
+  /* Border / Accent / Gray */
+  --token-border-accent-gray-default: #a7b3be;
+  --token-border-accent-gray-subtle: #c4cdd4;
+  --token-border-accent-gray-subtlest: #e1e6ea;
+  --token-border-accent-gray-disabled: #3b454f33;
+  /* Border / Accent / Blue */
+  --token-border-accent-blue-default: #19a1e6;
+  --token-border-accent-blue-subtle: #6cc3ef;
+  --token-border-accent-blue-subtlest: #a3daf5;
+  --token-border-accent-blue-disabled: #c8e9f9;
+  /* Border / Accent / Green */
+  --token-border-accent-green-default: #2cac4e;
+  --token-border-accent-green-subtle: #5ed97e;
+  --token-border-accent-green-subtlest: #87e89e;
+  --token-border-accent-green-disabled: #b3f4c1;
+  /* Border / Accent / Indigo */
+  --token-border-accent-indigo-default: #195ee6;
+  --token-border-accent-indigo-subtle: #6b98f0;
+  --token-border-accent-indigo-subtlest: #99b7f5;
+  --token-border-accent-indigo-disabled: #c2d4f9;
+  /* Border / Accent / Lime */
+  --token-border-accent-lime-default: #94d417;
+  --token-border-accent-lime-subtle: #c3ef6a;
+  --token-border-accent-lime-subtlest: #d4f393;
+  --token-border-accent-lime-disabled: #e4f8bb;
+  /* Border / Accent / Orange */
+  --token-border-accent-orange-default: #e65019;
+  --token-border-accent-orange-subtle: #f6b8a0;
+  --token-border-accent-orange-subtlest: #fad5c7;
+  --token-border-accent-orange-disabled: #fad5c7;
+  /* Border / Accent / Red */
+  --token-border-accent-red-default: #e93939;
+  --token-border-accent-red-subtle: #f28c8c;
+  --token-border-accent-red-subtlest: #f7baba;
+  --token-border-accent-red-disabled: #f7baba;
+  /* Border / Accent / Yellow */
+  --token-border-accent-yellow-default: #e8ca30;
+  --token-border-accent-yellow-subtle: #eed660;
+  --token-border-accent-yellow-subtlest: #f3e28c;
+  --token-border-accent-yellow-disabled: #f7edb7;
+
+  /* Interaction */
+  --token-interaction-hovered: #6d7f9214;
+  --token-interaction-pressed: #3b454f33;
+
+  /* Blanket */
+  --token-blanket: #0000007a;
+
+  /* Elevated */
+  --token-elevated-shadow-overlay: #11141770;
+  --token-elevated-shadow-raised: #3b454f33;
+  --token-elevated-surface-default: #ffffff;
+  --token-elevated-surface-overlay: #fcfdfd;
+  --token-elevated-surface-raised: #fcfdfd;
+  --token-elevated-surface-sunken: #e1e6ea;
+}
+
+/* ────────────────────────────────────────────────
+   Dark mode values (다크 모드 추가 시 여기에 오버라이드)
+   ──────────────────────────────────────────────── */
+/* :root:where(.dark) {
+  --token-fg-default: #fcfdfd;
+  --token-bg-default: #1f242a;
+  ... Dark.tokens.json 값으로 채우면 됩니다
+} */
+
+/* ────────────────────────────────────────────────
+   Tailwind 등록 — @theme inline으로 런타임 var() 참조
+   ──────────────────────────────────────────────── */
+@theme inline {
+  /* Fg */
+  --color-fg-default: var(--token-fg-default);
+  --color-fg-subtle: var(--token-fg-subtle);
+  --color-fg-subtlest: var(--token-fg-subtlest);
+  --color-fg-disabled: var(--token-fg-disabled);
+  --color-fg-selected: var(--token-fg-selected);
+  --color-fg-focused: var(--token-fg-focused);
+  --color-fg-danger-default: var(--token-fg-danger-default);
+  --color-fg-danger-bolder: var(--token-fg-danger-bolder);
+  --color-fg-warning-default: var(--token-fg-warning-default);
+  --color-fg-warning-bolder: var(--token-fg-warning-bolder);
+  --color-fg-success-default: var(--token-fg-success-default);
+  --color-fg-success-bolder: var(--token-fg-success-bolder);
+  --color-fg-info-default: var(--token-fg-info-default);
+  --color-fg-info-bolder: var(--token-fg-info-bolder);
+
+  /* Fg / Inverse */
+  --color-fg-inverse-default: var(--token-fg-inverse-default);
+  --color-fg-inverse-subtle: var(--token-fg-inverse-subtle);
+  --color-fg-inverse-subtlest: var(--token-fg-inverse-subtlest);
+  --color-fg-inverse-disabled: var(--token-fg-inverse-disabled);
+  --color-fg-inverse-selected: var(--token-fg-inverse-selected);
+  --color-fg-inverse-focused: var(--token-fg-inverse-focused);
+  --color-fg-inverse-danger-default: var(--token-fg-inverse-danger-default);
+  --color-fg-inverse-danger-bolder: var(--token-fg-inverse-danger-bolder);
+  --color-fg-inverse-warning-default: var(--token-fg-inverse-warning-default);
+  --color-fg-inverse-warning-bolder: var(--token-fg-inverse-warning-bolder);
+  --color-fg-inverse-success-default: var(--token-fg-inverse-success-default);
+  --color-fg-inverse-success-bolder: var(--token-fg-inverse-success-bolder);
+  --color-fg-inverse-info-default: var(--token-fg-inverse-info-default);
+  --color-fg-inverse-info-bolder: var(--token-fg-inverse-info-bolder);
+
+  /* Fg / Accent */
+  --color-fg-accent-brand1-default: var(--token-fg-accent-brand1-default);
+  --color-fg-accent-brand1-bolder: var(--token-fg-accent-brand1-bolder);
+  --color-fg-accent-brand1-subtle: var(--token-fg-accent-brand1-subtle);
+  --color-fg-accent-brand1-subtlest: var(--token-fg-accent-brand1-subtlest);
+  --color-fg-accent-brand1-disabled: var(--token-fg-accent-brand1-disabled);
+  --color-fg-accent-brand2-default: var(--token-fg-accent-brand2-default);
+  --color-fg-accent-brand2-bolder: var(--token-fg-accent-brand2-bolder);
+  --color-fg-accent-brand2-subtle: var(--token-fg-accent-brand2-subtle);
+  --color-fg-accent-brand2-subtlest: var(--token-fg-accent-brand2-subtlest);
+  --color-fg-accent-brand2-disabled: var(--token-fg-accent-brand2-disabled);
+  --color-fg-accent-gray-default: var(--token-fg-accent-gray-default);
+  --color-fg-accent-gray-bolder: var(--token-fg-accent-gray-bolder);
+  --color-fg-accent-gray-disabled: var(--token-fg-accent-gray-disabled);
+  --color-fg-accent-blue-default: var(--token-fg-accent-blue-default);
+  --color-fg-accent-blue-bolder: var(--token-fg-accent-blue-bolder);
+  --color-fg-accent-blue-disabled: var(--token-fg-accent-blue-disabled);
+  --color-fg-accent-green-default: var(--token-fg-accent-green-default);
+  --color-fg-accent-green-bolder: var(--token-fg-accent-green-bolder);
+  --color-fg-accent-green-disabled: var(--token-fg-accent-green-disabled);
+  --color-fg-accent-indigo-default: var(--token-fg-accent-indigo-default);
+  --color-fg-accent-indigo-bolder: var(--token-fg-accent-indigo-bolder);
+  --color-fg-accent-indigo-disabled: var(--token-fg-accent-indigo-disabled);
+  --color-fg-accent-lime-default: var(--token-fg-accent-lime-default);
+  --color-fg-accent-lime-bolder: var(--token-fg-accent-lime-bolder);
+  --color-fg-accent-lime-disabled: var(--token-fg-accent-lime-disabled);
+  --color-fg-accent-orange-default: var(--token-fg-accent-orange-default);
+  --color-fg-accent-orange-bolder: var(--token-fg-accent-orange-bolder);
+  --color-fg-accent-orange-disabled: var(--token-fg-accent-orange-disabled);
+  --color-fg-accent-red-default: var(--token-fg-accent-red-default);
+  --color-fg-accent-red-bolder: var(--token-fg-accent-red-bolder);
+  --color-fg-accent-red-disabled: var(--token-fg-accent-red-disabled);
+  --color-fg-accent-yellow-default: var(--token-fg-accent-yellow-default);
+  --color-fg-accent-yellow-bolder: var(--token-fg-accent-yellow-bolder);
+  --color-fg-accent-yellow-disabled: var(--token-fg-accent-yellow-disabled);
+
+  /* Bg */
+  --color-bg-default: var(--token-bg-default);
+  --color-bg-subtle: var(--token-bg-subtle);
+  --color-bg-subtlest: var(--token-bg-subtlest);
+  --color-bg-disabled: var(--token-bg-disabled);
+  --color-bg-selected: var(--token-bg-selected);
+  --color-bg-focused: var(--token-bg-focused);
+  --color-bg-danger: var(--token-bg-danger);
+  --color-bg-info: var(--token-bg-info);
+  --color-bg-success: var(--token-bg-success);
+  --color-bg-warning: var(--token-bg-warning);
+
+  /* Bg / Inverse */
+  --color-bg-inverse-default: var(--token-bg-inverse-default);
+  --color-bg-inverse-subtle: var(--token-bg-inverse-subtle);
+  --color-bg-inverse-subtlest: var(--token-bg-inverse-subtlest);
+  --color-bg-inverse-disabled: var(--token-bg-inverse-disabled);
+  --color-bg-inverse-selected: var(--token-bg-inverse-selected);
+  --color-bg-inverse-focused: var(--token-bg-inverse-focused);
+  --color-bg-inverse-danger: var(--token-bg-inverse-danger);
+  --color-bg-inverse-info: var(--token-bg-inverse-info);
+  --color-bg-inverse-success: var(--token-bg-inverse-success);
+  --color-bg-inverse-warning: var(--token-bg-inverse-warning);
+
+  /* Bg / Accent */
+  --color-bg-accent-brand1-default: var(--token-bg-accent-brand1-default);
+  --color-bg-accent-brand1-hovered: var(--token-bg-accent-brand1-hovered);
+  --color-bg-accent-brand1-pressed: var(--token-bg-accent-brand1-pressed);
+  --color-bg-accent-brand1-disabled: var(--token-bg-accent-brand1-disabled);
+  --color-bg-accent-brand1-subtle: var(--token-bg-accent-brand1-subtle);
+  --color-bg-accent-brand1-subtlest: var(--token-bg-accent-brand1-subtlest);
+  --color-bg-accent-brand2-default: var(--token-bg-accent-brand2-default);
+  --color-bg-accent-brand2-hovered: var(--token-bg-accent-brand2-hovered);
+  --color-bg-accent-brand2-pressed: var(--token-bg-accent-brand2-pressed);
+  --color-bg-accent-brand2-disabled: var(--token-bg-accent-brand2-disabled);
+  --color-bg-accent-brand2-subtle: var(--token-bg-accent-brand2-subtle);
+  --color-bg-accent-brand2-subtlest: var(--token-bg-accent-brand2-subtlest);
+  --color-bg-accent-gray-default: var(--token-bg-accent-gray-default);
+  --color-bg-accent-gray-hovered: var(--token-bg-accent-gray-hovered);
+  --color-bg-accent-gray-pressed: var(--token-bg-accent-gray-pressed);
+  --color-bg-accent-gray-disabled: var(--token-bg-accent-gray-disabled);
+  --color-bg-accent-gray-subtle: var(--token-bg-accent-gray-subtle);
+  --color-bg-accent-gray-subtlest: var(--token-bg-accent-gray-subtlest);
+  --color-bg-accent-blue-default: var(--token-bg-accent-blue-default);
+  --color-bg-accent-blue-hovered: var(--token-bg-accent-blue-hovered);
+  --color-bg-accent-blue-pressed: var(--token-bg-accent-blue-pressed);
+  --color-bg-accent-blue-disabled: var(--token-bg-accent-blue-disabled);
+  --color-bg-accent-blue-subtle: var(--token-bg-accent-blue-subtle);
+  --color-bg-accent-blue-subtlest: var(--token-bg-accent-blue-subtlest);
+  --color-bg-accent-green-default: var(--token-bg-accent-green-default);
+  --color-bg-accent-green-hovered: var(--token-bg-accent-green-hovered);
+  --color-bg-accent-green-pressed: var(--token-bg-accent-green-pressed);
+  --color-bg-accent-green-disabled: var(--token-bg-accent-green-disabled);
+  --color-bg-accent-green-subtle: var(--token-bg-accent-green-subtle);
+  --color-bg-accent-green-subtlest: var(--token-bg-accent-green-subtlest);
+  --color-bg-accent-indigo-default: var(--token-bg-accent-indigo-default);
+  --color-bg-accent-indigo-hovered: var(--token-bg-accent-indigo-hovered);
+  --color-bg-accent-indigo-pressed: var(--token-bg-accent-indigo-pressed);
+  --color-bg-accent-indigo-disabled: var(--token-bg-accent-indigo-disabled);
+  --color-bg-accent-indigo-subtle: var(--token-bg-accent-indigo-subtle);
+  --color-bg-accent-indigo-subtlest: var(--token-bg-accent-indigo-subtlest);
+  --color-bg-accent-lime-default: var(--token-bg-accent-lime-default);
+  --color-bg-accent-lime-hovered: var(--token-bg-accent-lime-hovered);
+  --color-bg-accent-lime-pressed: var(--token-bg-accent-lime-pressed);
+  --color-bg-accent-lime-disabled: var(--token-bg-accent-lime-disabled);
+  --color-bg-accent-lime-subtle: var(--token-bg-accent-lime-subtle);
+  --color-bg-accent-lime-subtlest: var(--token-bg-accent-lime-subtlest);
+  --color-bg-accent-orange-default: var(--token-bg-accent-orange-default);
+  --color-bg-accent-orange-hovered: var(--token-bg-accent-orange-hovered);
+  --color-bg-accent-orange-pressed: var(--token-bg-accent-orange-pressed);
+  --color-bg-accent-orange-disabled: var(--token-bg-accent-orange-disabled);
+  --color-bg-accent-orange-subtle: var(--token-bg-accent-orange-subtle);
+  --color-bg-accent-orange-subtlest: var(--token-bg-accent-orange-subtlest);
+  --color-bg-accent-red-default: var(--token-bg-accent-red-default);
+  --color-bg-accent-red-hovered: var(--token-bg-accent-red-hovered);
+  --color-bg-accent-red-pressed: var(--token-bg-accent-red-pressed);
+  --color-bg-accent-red-disabled: var(--token-bg-accent-red-disabled);
+  --color-bg-accent-red-subtle: var(--token-bg-accent-red-subtle);
+  --color-bg-accent-red-subtlest: var(--token-bg-accent-red-subtlest);
+  --color-bg-accent-yellow-default: var(--token-bg-accent-yellow-default);
+  --color-bg-accent-yellow-hovered: var(--token-bg-accent-yellow-hovered);
+  --color-bg-accent-yellow-pressed: var(--token-bg-accent-yellow-pressed);
+  --color-bg-accent-yellow-disabled: var(--token-bg-accent-yellow-disabled);
+  --color-bg-accent-yellow-subtle: var(--token-bg-accent-yellow-subtle);
+  --color-bg-accent-yellow-subtlest: var(--token-bg-accent-yellow-subtlest);
+
+  /* Border */
+  --color-border-default: var(--token-border-default);
+  --color-border-subtle: var(--token-border-subtle);
+  --color-border-subtlest: var(--token-border-subtlest);
+  --color-border-disabled: var(--token-border-disabled);
+  --color-border-selected: var(--token-border-selected);
+  --color-border-focused: var(--token-border-focused);
+  --color-border-overlay: var(--token-border-overlay);
+  --color-border-danger: var(--token-border-danger);
+  --color-border-info: var(--token-border-info);
+  --color-border-success: var(--token-border-success);
+  --color-border-warning: var(--token-border-warning);
+
+  /* Border / Inverse */
+  --color-border-inverse-default: var(--token-border-inverse-default);
+  --color-border-inverse-subtle: var(--token-border-inverse-subtle);
+  --color-border-inverse-subtlest: var(--token-border-inverse-subtlest);
+  --color-border-inverse-disabled: var(--token-border-inverse-disabled);
+  --color-border-inverse-selected: var(--token-border-inverse-selected);
+  --color-border-inverse-focused: var(--token-border-inverse-focused);
+  --color-border-inverse-overlay: var(--token-border-inverse-overlay);
+  --color-border-inverse-danger: var(--token-border-inverse-danger);
+  --color-border-inverse-info: var(--token-border-inverse-info);
+  --color-border-inverse-success: var(--token-border-inverse-success);
+  --color-border-inverse-warning: var(--token-border-inverse-warning);
+
+  /* Border / Accent */
+  --color-border-accent-brand1-default: var(--token-border-accent-brand1-default);
+  --color-border-accent-brand1-subtle: var(--token-border-accent-brand1-subtle);
+  --color-border-accent-brand1-subtlest: var(--token-border-accent-brand1-subtlest);
+  --color-border-accent-brand1-disabled: var(--token-border-accent-brand1-disabled);
+  --color-border-accent-brand2-default: var(--token-border-accent-brand2-default);
+  --color-border-accent-brand2-subtle: var(--token-border-accent-brand2-subtle);
+  --color-border-accent-brand2-subtlest: var(--token-border-accent-brand2-subtlest);
+  --color-border-accent-brand2-disabled: var(--token-border-accent-brand2-disabled);
+  --color-border-accent-gray-default: var(--token-border-accent-gray-default);
+  --color-border-accent-gray-subtle: var(--token-border-accent-gray-subtle);
+  --color-border-accent-gray-subtlest: var(--token-border-accent-gray-subtlest);
+  --color-border-accent-gray-disabled: var(--token-border-accent-gray-disabled);
+  --color-border-accent-blue-default: var(--token-border-accent-blue-default);
+  --color-border-accent-blue-subtle: var(--token-border-accent-blue-subtle);
+  --color-border-accent-blue-subtlest: var(--token-border-accent-blue-subtlest);
+  --color-border-accent-blue-disabled: var(--token-border-accent-blue-disabled);
+  --color-border-accent-green-default: var(--token-border-accent-green-default);
+  --color-border-accent-green-subtle: var(--token-border-accent-green-subtle);
+  --color-border-accent-green-subtlest: var(--token-border-accent-green-subtlest);
+  --color-border-accent-green-disabled: var(--token-border-accent-green-disabled);
+  --color-border-accent-indigo-default: var(--token-border-accent-indigo-default);
+  --color-border-accent-indigo-subtle: var(--token-border-accent-indigo-subtle);
+  --color-border-accent-indigo-subtlest: var(--token-border-accent-indigo-subtlest);
+  --color-border-accent-indigo-disabled: var(--token-border-accent-indigo-disabled);
+  --color-border-accent-lime-default: var(--token-border-accent-lime-default);
+  --color-border-accent-lime-subtle: var(--token-border-accent-lime-subtle);
+  --color-border-accent-lime-subtlest: var(--token-border-accent-lime-subtlest);
+  --color-border-accent-lime-disabled: var(--token-border-accent-lime-disabled);
+  --color-border-accent-orange-default: var(--token-border-accent-orange-default);
+  --color-border-accent-orange-subtle: var(--token-border-accent-orange-subtle);
+  --color-border-accent-orange-subtlest: var(--token-border-accent-orange-subtlest);
+  --color-border-accent-orange-disabled: var(--token-border-accent-orange-disabled);
+  --color-border-accent-red-default: var(--token-border-accent-red-default);
+  --color-border-accent-red-subtle: var(--token-border-accent-red-subtle);
+  --color-border-accent-red-subtlest: var(--token-border-accent-red-subtlest);
+  --color-border-accent-red-disabled: var(--token-border-accent-red-disabled);
+  --color-border-accent-yellow-default: var(--token-border-accent-yellow-default);
+  --color-border-accent-yellow-subtle: var(--token-border-accent-yellow-subtle);
+  --color-border-accent-yellow-subtlest: var(--token-border-accent-yellow-subtlest);
+  --color-border-accent-yellow-disabled: var(--token-border-accent-yellow-disabled);
+
+  /* Interaction */
+  --color-interaction-hovered: var(--token-interaction-hovered);
+  --color-interaction-pressed: var(--token-interaction-pressed);
+
+  /* Blanket */
+  --color-blanket: var(--token-blanket);
+
+  /* Elevated */
+  --color-elevated-shadow-overlay: var(--token-elevated-shadow-overlay);
+  --color-elevated-shadow-raised: var(--token-elevated-shadow-raised);
+  --color-elevated-surface-default: var(--token-elevated-surface-default);
+  --color-elevated-surface-overlay: var(--token-elevated-surface-overlay);
+  --color-elevated-surface-raised: var(--token-elevated-surface-raised);
+  --color-elevated-surface-sunken: var(--token-elevated-surface-sunken);
+}
