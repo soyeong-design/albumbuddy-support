@@ -2,7 +2,7 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { CancelCircleMono, HelpMono } from '../icons';
 import { faqs, popularityOrder } from '../lib/faqData';
-import { trackClick, getDisplayCounts, refreshSnapshot } from '../lib/faqClickTracker';
+import { trackClick, getDisplayCounts, fetchGlobalCounts, refreshSnapshot } from '../lib/faqClickTracker';
 import { fetchFaqItems } from '../lib/faqNotion';
 import { t, currentLang } from '../i18n';
 
@@ -132,13 +132,18 @@ onMounted(async () => {
   window.addEventListener('scroll', handleScroll, { passive: true });
   requestAnimationFrame(measureBar);
 
-  // 1시간 스냅샷 기준 카운트 로드
+  // 동기 캐시로 즉시 표시, 이후 Worker에서 전체 집계 비동기 로드
   clickCounts.value = getDisplayCounts();
+  fetchGlobalCounts().then((counts) => {
+    clickCounts.value = counts;
+  });
 
-  // 1시간마다 스냅샷 갱신 → 정렬 반영
+  // 1시간마다 Worker에서 최신 집계 갱신
   snapshotTimer = setInterval(
     () => {
-      clickCounts.value = refreshSnapshot();
+      refreshSnapshot().then((counts) => {
+        clickCounts.value = counts;
+      });
     },
     60 * 60 * 1000,
   );

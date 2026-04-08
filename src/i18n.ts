@@ -412,6 +412,9 @@ const translations: Record<string, Record<Lang, string>> = {
   '일반 공지': { ko: '일반 공지', en: 'General', ja: 'お知らせ', 'zh-CN': '一般公告' },
   약관: { ko: '약관', en: 'Terms', ja: '約款', 'zh-CN': '条款' },
   '이용 가이드': { ko: '이용 가이드', en: 'Guide', ja: 'ご利用ガイド', 'zh-CN': '使用指南' },
+  '이벤트 관련 공지': { ko: '이벤트 관련 공지', en: 'Events', ja: 'イベント', 'zh-CN': '活动公告' },
+  '휴일 관련 공지': { ko: '휴일 관련 공지', en: 'Holidays', ja: '休日のお知らせ', 'zh-CN': '假日公告' },
+  '긴급 공지': { ko: '긴급 공지', en: 'Urgent', ja: '緊急のお知らせ', 'zh-CN': '紧急公告' },
   'footer-desc': {
     ko: 'AlbumBuddy는 해외에서 K-pop 앨범, 굿즈 등을 쉽고 편리하게\n구매하고 받을 수 있도록 도와주는 구매대행 및 배송대행 서비스입니다.',
     en: 'AlbumBuddy is a proxy buying and shipping service that helps you easily buy\nand receive K-pop albums, merch, and more from overseas for your convenience.',
@@ -422,7 +425,12 @@ const translations: Record<string, Record<Lang, string>> = {
 
 export function t(key: string): string {
   const entry = translations[key];
-  if (!entry) return key;
+  if (!entry) {
+    if (import.meta.env.DEV) {
+      console.warn(`[i18n] 미번역 키: "${key}" — i18n.ts에 번역을 추가하세요.`);
+    }
+    return key;
+  }
   return entry[currentLang.value] || entry.ko || key;
 }
 

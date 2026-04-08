@@ -2,7 +2,7 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { t, currentLang } from '../i18n';
 import { faqs, popularityOrder, categoryKeyMap } from '../lib/faqData';
-import { getTopKeys } from '../lib/faqClickTracker';
+import { getTopKeys, fetchGlobalCounts } from '../lib/faqClickTracker';
 import { fetchFaqItems } from '../lib/faqNotion';
 
 const emit = defineEmits<{ navigate: [view: string] }>();
@@ -89,12 +89,12 @@ function toggleFaq(idx: number) {
 watch(currentLang, refreshTopFaqs);
 
 onMounted(async () => {
-  // Notion 데이터 fetch
-  try {
-    notionFaqItems.value = await fetchFaqItems();
-  } catch {
-    // 실패 시 로컬 데이터 사용
-  }
+  // Worker에서 전체 사용자 통합 집계 로드 + Notion 데이터 fetch (병렬)
+  const [, faqItems] = await Promise.all([
+    fetchGlobalCounts(),
+    fetchFaqItems().catch(() => [] as FaqNotionItem[]),
+  ]);
+  notionFaqItems.value = faqItems;
   refreshTopFaqs();
   topFaqsLoading.value = false;
 });
