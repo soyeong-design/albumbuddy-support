@@ -553,7 +553,7 @@ watch(currentLang, async () => {
     padding: 24px 0;
   }
   .board-detail-content {
-    max-width: 800px;
+    max-width: 100%;
   }
   .notices-chips {
     flex-wrap: wrap;
